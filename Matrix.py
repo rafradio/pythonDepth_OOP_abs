@@ -1,8 +1,11 @@
+import abc
 from collections.abc import MutableMapping
 
-class BaseDict(MutableMapping):
+class BaseDict(MutableMapping, metaclass=abc.ABCMeta):
         def __init__(self, *args, **kwds):
             self.store = {}
+            self.rows = kwds['rows']
+            self.columns = kwds['columns']
             for el in args[0]:
                 mapping = {(el[0], el[1]): el[2]}
                 self.store.update(mapping)
@@ -23,12 +26,17 @@ class BaseDict(MutableMapping):
         def __iter__(self):
             return iter(self.store)
         
+        def __str__(self):
+            txt = str()
+            for i in range(self.rows):
+                txt += ' '.join([f'{str(self.store[i+1, j+1])}  ' for j in range(self.columns)]) + '\n'
+            return txt
+        
         def __repr__(self):
             return repr(self.store)
+        
+        @abc.abstractmethod
+        def __mul__(self):...
 
-# d = BaseDict([(1, 2, 10), (1, 3, 20)])
-# # d.update({(1,5): 30})
-# m = iter(d)
-# print(d)
-# print(d[next(m)])
-# print(next(m))
+        @abc.abstractmethod
+        def __add__(self):...
