@@ -40,3 +40,6 @@ class BaseDict(MutableMapping, metaclass=abc.ABCMeta):
 
         @abc.abstractmethod
         def __add__(self):...
+
+        @abc.abstractmethod
+        def __eq__(self):...
