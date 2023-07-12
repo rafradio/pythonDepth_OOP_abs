@@ -11,9 +11,13 @@ def main():
     m2[3, 3] = 7
     m3 = m1 * m2
     m4 = m1 + m2
-    print(m3)
-    print(m4)
-    print(BaseDict.__abstractmethods__)
+    m4 = MatrixDict(3, 3, 2)
+    m5 = MatrixDict(3, 3, 2)
+    print("После умножения: ", m3)
+    print("После сложения: ", m4)
+    print(f'Результат сравнения {m1 == m4 = }')
+    print(f'Результат сравнения {m5 == m4 = }')
+    # print(BaseDict.__abstractmethods__)
     # print(m3.items())
     # print(m1[2,3])
     # obj[5,3] = 55
