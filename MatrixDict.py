@@ -32,12 +32,20 @@ class MatrixDict(BaseDict):
         c = []
         for i in range(self.rows):
             for j in range(other.columns):
-                v = 0
-                for elm in range(other.rows):
-                    v += self[i+1, elm+1] * other[elm+1, j+1]
+                v = sum([self[i+1, elm+1] * other[elm+1, j+1] for elm in range(self.rows)])
                 c.append((i+1, j+1, v))
         return MatrixDict(self.rows, other.columns, 0, c)
 
+    def __eq__(self, other):
+        if self.rows != other.rows or self.columns != other.columns:
+            return 'Матрицы не одинаковы'
+        
+        for i in range(self.rows):
+            for j in range(other.columns):
+                if int(self[i+1, j+1]) != int(other[i+1, j+1]):
+                    return 'Матрицы не одинаковы'
+                
+        return 'Матрицы одинаковы'
     
     def __str__(self):
         txt = self.__doc__ + '\n'
